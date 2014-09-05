@@ -7,6 +7,8 @@ import org.eclipse.core.commands.operations.IUndoContext;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.IUndoManager;
 import org.eclipse.jface.text.IUndoManagerExtension;
+import org.eclipse.jface.text.TextViewer;
+import org.eclipse.swt.custom.StyledText;
 
 public class EclipseHistoryService implements IUndoManager, IUndoManagerExtension, HistoryService {
 
@@ -113,6 +115,8 @@ public class EclipseHistoryService implements IUndoManager, IUndoManagerExtensio
      *  there - this function is just a fallback.
      */
     private void deselectAll() {
+        // XXX: we acheive some degree of Vim compatibility by jumping
+        // to beginning of selection; this is hackish
         final int caretOffset = textViewer.getSelectedRange().x;
         textViewer.setSelectedRange(caretOffset, 0);
     }
