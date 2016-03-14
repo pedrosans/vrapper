@@ -244,6 +244,8 @@ public class VimInputInterceptorFactory implements InputInterceptorFactory {
             }
         }
 
+        interceptor.setEclipseCommandHandler(new EclipseCommandHandler(editorAdaptor));
+
         SelectionVisualHandler visualHandler = new SelectionVisualHandler(editorAdaptor,
                 platform.getSelectionService(), textViewer);
         interceptor.setSelectionVisualHandler(visualHandler);
@@ -262,6 +264,7 @@ public class VimInputInterceptorFactory implements InputInterceptorFactory {
         private CaretPositionHandler caretPositionHandler;
         private SelectionVisualHandler selectionVisualHandler;
         private CaretPositionUndoHandler caretPositionUndoHandler;
+        private EclipseCommandHandler eclipseCommandHandler;
         private EclipsePlatform eclipsePlatform;
 
         private VimInputInterceptor(EditorAdaptor editorAdaptor) {
@@ -352,6 +355,16 @@ public class VimInputInterceptorFactory implements InputInterceptorFactory {
         @Override
         public void setCaretPositionUndoHandler(CaretPositionUndoHandler handler) {
             this.caretPositionUndoHandler = handler;
+        }
+
+        @Override
+        public EclipseCommandHandler getEclipseCommandHandler() {
+            return eclipseCommandHandler;
+        }
+
+        @Override
+        public void setEclipseCommandHandler(EclipseCommandHandler handler) {
+            this.eclipseCommandHandler = handler;
         }
 
         @Override
