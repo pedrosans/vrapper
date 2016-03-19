@@ -245,7 +245,8 @@ public class VimInputInterceptorFactory implements InputInterceptorFactory {
             }
         }
 
-        interceptor.setEclipseCommandHandler(new EclipseCommandHandler(editorAdaptor));
+        interceptor.setEclipseCommandHandler(new EclipseCommandHandler(editorAdaptor,
+                EclipseCommandRegistry.INSTANCE));
 
         SelectionVisualHandler visualHandler = new SelectionVisualHandler(editorAdaptor,
                 platform.getSelectionService(), textViewer, interceptor.getEclipseCommandHandler());
