@@ -1,18 +1,10 @@
-![vrapper](https://github.com/vrapper/vrapper/raw/master/website/img/vrapper_logo.png)
+Fork of Vrapper adding the optional plugin Bindings Keeper
+-
 
-Vim-like editing in Eclipse  [![Join the chat at https://gitter.im/vrapper/vrapper](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vrapper/vrapper?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
----------------------------
+The plugin removes Eclipse's key bindings conflicting with VIM's ones while both Vrapper and the plugin are enabled. 
 
-Vrapper is an Eclipse plugin which acts as a wrapper for Eclipse text editors to provide a Vim-like input scheme for moving around and editing text.
+The plugin can be activated and configured at its preference page: Window>Preferences>Vrapper Preferences
 
-**Stable Update Site:** http://vrapper.sourceforge.net/update-site/stable
-
-**Unstable Update Site:** http://vrapper.sourceforge.net/update-site/unstable
+**Unstable Update Site:** https://github.com/pedrosans/vrapper/raw/site/vrapper-unstable-update-site
 
 License: [GPL v3 or any later version](LICENSE.md)
-
-Home Page: http://vrapper.sourceforge.net/home/
-
-Documentation: http://vrapper.sourceforge.net/documentation/
-
-Developer Wiki: https://github.com/vrapper/vrapper/wiki

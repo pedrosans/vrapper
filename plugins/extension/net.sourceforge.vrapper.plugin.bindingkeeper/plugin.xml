@@ -22,4 +22,18 @@
             class="net.sourceforge.vrapper.plugin.bindingkeeper.preferences.PreferenceInitializer">
       </initializer>
    </extension>
+   <extension point="org.eclipse.ui.bindings">
+       <key
+             commandId="net.sourceforge.vrapper.eclipse.commands.toggle"
+             contextId="org.eclipse.jdt.ui.javaEditorScope"
+             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+             sequence="M1+I">
+       </key>
+       <key
+             commandId="net.sourceforge.vrapper.eclipse.commands.toggle"
+             contextId="org.eclipse.ui.contexts.window"
+             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+             sequence="M1+I">
+       </key>
+   </extension>
 </plugin>
