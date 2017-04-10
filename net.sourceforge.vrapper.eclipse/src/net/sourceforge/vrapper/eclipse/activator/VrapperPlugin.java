@@ -1,13 +1,5 @@
 package net.sourceforge.vrapper.eclipse.activator;
 
-import net.sourceforge.vrapper.eclipse.interceptor.InputInterceptor;
-import net.sourceforge.vrapper.eclipse.interceptor.InputInterceptorManager;
-import net.sourceforge.vrapper.eclipse.interceptor.UnknownEditorException;
-import net.sourceforge.vrapper.log.Log;
-import net.sourceforge.vrapper.log.VrapperLog;
-import net.sourceforge.vrapper.platform.VrapperPlatformException;
-import net.sourceforge.vrapper.vim.EditorAdaptor;
-
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
@@ -27,10 +19,20 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.prefs.BackingStoreException;
+
+import net.sourceforge.vrapper.eclipse.interceptor.EclipseSelectionCommandListener;
+import net.sourceforge.vrapper.eclipse.interceptor.InputInterceptor;
+import net.sourceforge.vrapper.eclipse.interceptor.InputInterceptorManager;
+import net.sourceforge.vrapper.eclipse.interceptor.UnknownEditorException;
+import net.sourceforge.vrapper.log.Log;
+import net.sourceforge.vrapper.log.VrapperLog;
+import net.sourceforge.vrapper.platform.VrapperPlatformException;
+import net.sourceforge.vrapper.vim.EditorAdaptor;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -62,6 +64,8 @@ public class VrapperPlugin extends AbstractUIPlugin implements IStartup, Log {
     private static final IEclipsePreferences PLUGIN_PREFERENCES = new InstanceScope().getNode(PLUGIN_ID);
 
 	private static MouseButtonListener mouseButton = new MouseButtonListener();
+
+	private static EclipseSelectionCommandListener selectionCommandListener = new EclipseSelectionCommandListener();
 
     private boolean debugLogEnabled = Boolean.parseBoolean(System.getProperty(DEBUGLOG_PROPERTY))
             || Boolean.parseBoolean(Platform.getDebugOption("net.sourceforge.vrapper.eclipse/debug"));
@@ -143,6 +147,9 @@ public class VrapperPlugin extends AbstractUIPlugin implements IStartup, Log {
         window.getPartService().addPartListener(InputInterceptorManager.INSTANCE);
         window.getWorkbench().getDisplay().addFilter(SWT.MouseDown, mouseButton);
         window.getWorkbench().getDisplay().addFilter(SWT.MouseUp, mouseButton);
+
+		ICommandService service = window.getWorkbench().getService(ICommandService.class);
+		service.getCommand("org.eclipse.jdt.ui.edit.text.java.select.enclosing").addExecutionListener(selectionCommandListener);
     }
     
     void addShutdownListener() {
@@ -236,7 +243,11 @@ public class VrapperPlugin extends AbstractUIPlugin implements IStartup, Log {
     public static boolean isVrapperEnabled() {
         return vrapperEnabled;
     }
-    
+
+    public static boolean isSelectingViaCommand(){
+    	return selectionCommandListener.isSelectingViaCommand();
+    }
+
     public static boolean isMouseDown() {
     	return mouseButton.down;
     }

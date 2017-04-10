@@ -71,8 +71,8 @@ public class SelectionVisualHandler implements ISelectionChangedListener {
                 CommandBasedMode commandMode = (CommandBasedMode) currentMode;
                 commandMode.placeCursor(StickyColumnPolicy.RESET_EOL);
             }
-        } else if ( ! VrapperPlugin.isMouseDown()
-                || !editorAdaptor.getConfiguration().get(Options.VISUAL_MOUSE)) {
+        } else if (! VrapperPlugin.isSelectingViaCommand()
+	        	&& (! VrapperPlugin.isMouseDown() || !editorAdaptor.getConfiguration().get(Options.VISUAL_MOUSE))) {
             // Mark selection as "conflicted" - we're in Normal mode but somehow a selection exists
             if (editorAdaptor.getCurrentMode() instanceof NormalMode) {
                 ((CommandBasedMode)editorAdaptor.getCurrentMode()).placeCursor(StickyColumnPolicy.NEVER);
