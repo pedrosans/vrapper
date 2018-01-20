@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Vrapper Binding Keeper Plug-in
 Bundle-SymbolicName: net.sourceforge.vrapper.plugin.bindingkeeper;singleton:=true
-Bundle-Version: 0.71.20170105
+Bundle-Version: 0.73.0.qualifier
 Export-Package: net.sourceforge.vrapper.plugin.bindingkeeper.listener
 Require-Bundle: net.sourceforge.vrapper.core,
  org.eclipse.core.runtime,
